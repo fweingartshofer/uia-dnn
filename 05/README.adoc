@@ -1,0 +1,37 @@
+= Lab 05: Object Detection
+:authors: Fabian Haas, Markus Reichl, Florian Weingartshofer
+:source-highlighter: rouge
+:rouge-style: github
+
+== Dataset
+The balloon dataset from the mask rcnn example is used, but for our use case had to be converted.
+We decided to use ultraletics' YOLO for object detection and this requires us to provide the model in a specific format.
+This was done using roboflow.com[roboflow.com], which allowed us to load the dataset with YOLO.
+After converting the dataset to a YOLO compatible format we were able to load it.
+
+== The Model
+The exercise description said to use pretrained models for object detection, so we used YOLOs pretrained model `yolov8n.pt`.
+YOLOs API turned out to be very simple and easy to use.
+Essentially three steps are needed in the beginning to start and train a model.
+In its most basic form training a model with YOLO requires only three lines of code.
+
+This workflow simplified training the model for balloons and helped us finish this exercise with good results.
+We trained the model for 100 epochs on the default dataset and got some promising results.
+
+With the model being trained we decided to try it ourselves with some test images.
+The figure below on the left shows how YOLO performs on the validation dataset.
+It shows that the resulting model is good at predicting balloons that are in the dataset itself.
+We added some random images from a Google search to check how the model performs on them.
+
+
+.Validation Dataset and Predictions
+[cols=">a,<a,<a", frame=none, grid=none]
+|===
+| image::../runs/detect/val2/val_batch0_pred.jpg[scale=10]
+| image::../runs/detect/predict/_97256115_mediaitem97256111.jpg[scale=20]
+| image::../runs/detect/predict2/Three-Australian-Shepherd-puppies-sitting-in-a-field.jpg[scale=20]
+
+| image::../runs/detect/predict3/_methode_times_prod_web_bin_b743f1f2-bf27-11ec-8413-422ef6319ad0.jpg[scale=4]
+|
+|
+|===
