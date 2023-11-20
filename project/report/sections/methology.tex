@@ -1,1 +1,24 @@
 \section{Methodology}\label{sec:methology}
+
+\subsection{Dataset}\label{subsec:dataset}
+
+In our project, we utilized the \emph{Human Activity Recognition Using Smartphones} dataset, referenced in our literature as~\cite{misc_human_activity_recognition_using_smartphones_240}.
+This database is built from recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
+
+It was sourced from a diverse group of 30 volunteers aged 19--48, the dataset captures six common activities: walking, walking upstairs, walking downstairs, sitting, standing, and laying.
+Each subject wore a Samsung Galaxy S II smartphone on the waist, enabling the capture of 3-axial linear acceleration and 3-axial angular velocity at a 50Hz rate.
+The dataset, a multivariate time-series collection in the computer science domain, is suitable for tasks such as classification and clustering.
+
+Instead of the raw time-series data, we utilized the processed features of the \emph{Human Activity Recognition Using Smartphones} dataset.
+The dataset provided a comprehensive set of features derived from the accelerometer and gyroscope sensors, which were more aligned with our project objectives.
+
+These features include various statistical measures estimated from the processed sensor signals such as but not limited to mean, standard deviation, median absolute deviation as well as frequency domain features derived from the Fast Fourier Transform (FFT).
+In total, the dataset provided 561 features for each sample.
+Which of these features were used in our project is discussed in Section~\ref{subsec:preprocessing}.
+
+The authors of the dataset also provided a partitioned dataset, which was split into two sets: a training set and a test set.
+The training set consists of 70\% of the data, while the test set consists of the remaining 30\%.
+Which comes to 7352 and 2947 samples respectively.
+
+
+\subsection{Preprocessing}\label{subsec:preprocessing}
