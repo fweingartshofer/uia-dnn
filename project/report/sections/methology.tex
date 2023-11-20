@@ -22,3 +22,72 @@ Which comes to 7352 and 2947 samples respectively.
 
 
 \subsection{Preprocessing}\label{subsec:preprocessing}
+
+Since the dataset was already processed, we did not have to perform any preprocessing steps to generate features, but we did some preprocessing to reduce the number of features.
+
+% TODO search for paper to reference for correlation matrix
+
+For this we used a correlation matrix to find features that were highly correlated with each other.
+Features that have a high correlation with each other, imply that they are redundant and can be removed.
+Redundant features can be removed, since the information they provide is already captured by other features.
+This reduces the number of features, which in turn leads to models that are less complex, as they need to learn fewer features.
+
+Figure~\ref{fig:cormat-before} shows the correlation matrix before preprocessing, while Figure~\ref{fig:cormat-after} shows the correlation matrix after preprocessing.
+As a threshold for removing features, we used a correlation coefficient of \emph{0.95}.
+This reduced the amount of features from 561 to 253, effectively reducing the number of features by more than half.
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./img/correlation-matrix-before}
+        \caption{Correlation matrix before preprocessing}
+        \label{fig:cormat-before}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./img/correlation-matrix-after}
+        \caption{Correlation matrix after preprocessing}
+        \label{fig:cormat-after}
+    \end{minipage}
+\end{figure}
+
+We also decided to use the test set provided by the dataset as our held-back test set.
+For training, we split the training set into a set used for actual training and a set used for validation.
+This was done to be able to evaluate the performance of the model during training, and to ensure that the model did not overfit to the training set.
+The validation set was 30\% of the training set, which comes to around 2206 samples for the validation set and 5146 samples for the training set.
+
+\subsection{Architectures}\label{subsec:architectures}
+
+This section discusses the architectures we tried and evaluated in our project.
+For different architectures we tried to first build a simple model, and then a more complex one that where we also tuned the hyperparameters.
+
+\subsubsection{Feedforward Neural Network}
+
+\textbf{Simple Feedforward Neural Network}
+
+Our project initiated with a simple Feedforward Neural Network (FF).
+This model consisted of an initial dense layer with 512 units, a hidden dense layer with 128 units using the ReLU activation function, and an output dense layer with 6 unit.
+This was the simplest model we could think of.
+
+\textbf{Tuned Complex Feedforward Neural Network}
+
+The results from the simple Feedforward model were not satisfactory, so we decided to build a more complex model and tune it.
+For this we utilized Keras Tuner, employing a RandomSearch strategy.
+This approach allowed us to automatically fine-tune the hyperparameters of our model, such as the number of layers, the number of units in each layer, the dropout rate, and the learning rate.
+The goal was to identify the most effective configuration for our dataset, enhancing the model's performance.
+
+\subsubsection{Convolutional Neural Network}
+
+\textbf{Simple Convolutional Neural Network}
+
+We also developed a Convolutional Neural Network model, comprising convolutional layers, max pooling, global max pooling, a dropout layer for regularization, and a softmax output layer.
+While such models are typically used for image classification, we wanted to explore whether they could be used for time-series classification as well.
+This also did not need any real preprocessing apart from reshaping the data to fit the input shape of the network.
+
+\textbf{Tuned Complex Convolutional Neural Network}
+While the simple Convolutional Neural Network model performed well, we still wanted to explore whether we could improve its performance by tuning its hyperparameters.
+This involved tuning the number of filters in the convolutional layers and the dropout rate.
+
+
+
