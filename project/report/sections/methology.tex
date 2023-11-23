@@ -5,7 +5,7 @@
 In our project, we utilized the \emph{Human Activity Recognition Using Smartphones} dataset, referenced in our literature as~\cite{misc_human_activity_recognition_using_smartphones_240}.
 This database is built from recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
 
-It was sourced from a diverse group of 30 volunteers aged 19--48, the dataset captures six common activities: walking, walking upstairs, walking downstairs, sitting, standing, and laying.
+It was sourced from a diverse group of 30 volunteers aged 19--48; the dataset captures six common activities: walking, walking upstairs, walking downstairs, sitting, standing, and laying.
 Each subject wore a Samsung Galaxy S II smartphone on the waist, enabling the capture of 3-axial linear acceleration and 3-axial angular velocity at a 50Hz rate.
 The dataset, a multivariate time-series collection in the computer science domain, is suitable for tasks such as classification and clustering.
 
@@ -20,6 +20,52 @@ The authors of the dataset also provided a partitioned dataset, which was split 
 The training set consists of 70\% of the data, while the test set consists of the remaining 30\%.
 Which comes to 7352 and 2947 samples respectively.
 
+\subsection{Data Exploration}\label{subsec:data-exploration}
+
+In machine learning, it is important to understand the data you are working with, since this can help you decide which features to use and which machine learning approach to use.
+Therefore, we analyzed the dataset with plots to get a better understanding of the data we were working with.
+
+Since looking at all the features was not feasible, we decided to only look at features that had less than 10\% correlation with other features.
+Doing this ensures that we look at features that had the least amount of redundancy and should therefore be the most informative.
+
+Figure~\ref{fig:pairplot} shows a pair-plot of the features we decided to look at.
+A pair-plot shows a scatterplot for each feature combination, as well as histograms of the features along the diagonal.
+From the pair-plot, we can see that there are some features that could be used to distinguish between a few classes.
+The features \texttt{tBodyAcc-std()-X} and \texttt{tBodyAcc-correlation()-X,Z}, for example, show a good separation between the different \texttt{WALKING} activities and the more stationary activities.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./img/pairplot}
+    \caption{Pairplot of highly uncorrelated features}
+    \label{fig:pairplot}
+\end{figure}
+
+This is further confirmed by looking at the boxplot in Figure~\ref{fig:boxplot}, which shows the distribution of the features for each class, and the feature \texttt{tBodyAcc-std()-X} also shows a good separation between the stationary activities and the \texttt{WALKING} activities.
+The boxplot further shows that some features have little variance, such as \texttt{tBodyBodyGyroJerkMag-maxInds}, which has a small interquartile range and a lot of outliers.
+The feature \texttt{tBodyAcc-correlation()-X,Z} on the other hand shows a strong overlap between the classes, which is not surprising since it is a correlation between two features that are already used to distinguish between the classes.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./img/boxplot}
+    \caption{Boxplot of tBodyAcc-std()-X, tBodyAcc-correlation()-X,Z and tBodyBodyGyroJerkMag-maxInds}
+    \label{fig:boxplot}
+\end{figure}
+
+The plot that showed the most promise was the line-plot in Figure~\ref{fig:lineplot}, which shows the total acceleration over time in each axis.
+This graph shows that the accelerations can definitely be used to distinguish between the different activities, since they have very different patterns with little overlap.
+The activity \texttt{LAYING} can be distinguished from the other activities, as it has no overlap with the other activities.
+The activities \texttt{SITTING} also shows no overlap with the other activities in the Z-axis and Y-axis, apart from itself.
+But the graph even allows us to clearly identify \texttt{STANDING} which has a lot of overlaps in the X and Y-axis, but can still be distinguished from the other activities in the Z-axis.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./img/lineplot}
+    \caption{Lineplot of total acceleration over time in each axis}
+    \label{fig:lineplot}
+\end{figure}
+
+The data exploration showed that the data is definitely separable and can probably also be solved with less complex machine learning approaches.
+However, since the focus of the project was on deep learning, we did not explore other machine learning approaches such as knn, decision trees or support vector machines.
 
 \subsection{Preprocessing}\label{subsec:preprocessing}
 
@@ -27,14 +73,14 @@ Since the dataset was already processed, we did not have to perform any preproce
 
 % TODO search for paper to reference for correlation matrix
 
-For this we used a correlation matrix to find features that were highly correlated with each other.
-Features that have a high correlation with each other, imply that they are redundant and can be removed.
-Redundant features can be removed, since the information they provide is already captured by other features.
+For this, we used a correlation matrix to find features that were highly correlated with each other.
+Features that have a high correlation with each other imply that they are redundant and can be removed.
+Redundant features can be removed since the information they provide is already captured by other features.
 This reduces the number of features, which in turn leads to models that are less complex, as they need to learn fewer features.
 
 Figure~\ref{fig:cormat-before} shows the correlation matrix before preprocessing, while Figure~\ref{fig:cormat-after} shows the correlation matrix after preprocessing.
 As a threshold for removing features, we used a correlation coefficient of \emph{0.95}.
-This reduced the amount of features from 561 to 253, effectively reducing the number of features by more than half.
+This reduced the number of features from 561 to 253, effectively reducing the number of features by more than half.
 
 \begin{figure}[ht]
     \centering
@@ -54,26 +100,26 @@ This reduced the amount of features from 561 to 253, effectively reducing the nu
 
 We also decided to use the test set provided by the dataset as our held-back test set.
 For training, we split the training set into a set used for actual training and a set used for validation.
-This was done to be able to evaluate the performance of the model during training, and to ensure that the model did not overfit to the training set.
+This was done to be able to evaluate the performance of the model during training, and to ensure that the model did not over fit to the training set.
 The validation set was 30\% of the training set, which comes to around 2206 samples for the validation set and 5146 samples for the training set.
 
 \subsection{Architectures}\label{subsec:architectures}
 
 This section discusses the architectures we tried and evaluated in our project.
-For different architectures we tried to first build a simple model, and then a more complex one that where we also tuned the hyperparameters.
+For different architectures, we tried to first build a simple model, and then a more complex one that where we also tuned the hyperparameters.
 
 \subsubsection{Feedforward Neural Network}
 
 \textbf{Simple Feedforward Neural Network}
 
 Our project initiated with a simple Feedforward Neural Network (FF).
-This model consisted of an initial dense layer with 512 units, a hidden dense layer with 128 units using the ReLU activation function, and an output dense layer with 6 unit.
+This model consisted of an initial dense layer with 512 units, a hidden dense layer with 128 units using the ReLU activation function, and an output dense layer with 6 neurons.
 This was the simplest model we could think of.
 
 \textbf{Tuned Complex Feedforward Neural Network}
 
 The results from the simple Feedforward model were not satisfactory, so we decided to build a more complex model and tune it.
-For this we utilized Keras Tuner, employing a RandomSearch strategy.
+For this, we utilized Keras Tuner, employing a RandomSearch strategy.
 This approach allowed us to automatically fine-tune the hyperparameters of our model, such as the number of layers, the number of units in each layer, the dropout rate, and the learning rate.
 The goal was to identify the most effective configuration for our dataset, enhancing the model's performance.
 
