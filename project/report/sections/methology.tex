@@ -135,5 +135,14 @@ This also did not need any real preprocessing apart from reshaping the data to f
 While the simple Convolutional Neural Network model performed well, we still wanted to explore whether we could improve its performance by tuning its hyperparameters.
 This involved tuning the number of filters in the convolutional layers and the dropout rate.
 
+\subsubsection{Long Short-Term Memory}
 
+We wanted to also try classification by using the windowed time series values instead of the processed features.
+We decided to try a Long Short-Term Memory (LSTM) model, which is a type of Recurrent Neural Network (RNN) that is commonly used for time series classification.
+We did not tune the hyperparameters of this model, since we wanted to see how well it would perform without tuning.
+
+\subsubsection{Transformer}
+
+Since transformers are currently very popular in the field of natural language processing, we wanted to see if they could also be used for time series classification.
+Again, we did not tune the hyperparameters of this model to see how well it would perform without tuning.
 
