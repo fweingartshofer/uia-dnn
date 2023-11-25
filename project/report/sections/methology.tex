@@ -124,8 +124,16 @@ This was the simplest model we could think of.
 
 The results from the simple Feedforward model were not satisfactory, so we decided to build a more complex model and tune it.
 For this, we utilized Keras Tuner, employing a RandomSearch strategy.
-This approach allowed us to automatically fine-tune the hyperparameters of our model, such as the number of layers, the number of units in each layer, the dropout rate, and the learning rate.
+This approach allowed us to automatically fine-tune the hyperparameters of our model.
+Figure~\ref{fig:fnn-tunable-neurons} shows the network and what parameters are tunable, such as the number of layers, the number of units in each layer and the dropout rate.
 The goal was to identify the most effective configuration for our dataset, enhancing the model's performance.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./img/ffnn/tuned/fnn-tunable-neurons}
+    \caption{Visualization of tunable Feedforward Neural Network architecture}
+    \label{fig:fnn-tunable-neurons}
+\end{figure}
 
 \subsubsection{Convolutional Neural Network}
 
