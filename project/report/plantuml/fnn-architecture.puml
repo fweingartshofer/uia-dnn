@@ -1,0 +1,34 @@
+@startuml
+class InputLayer {
+    +253
+}
+
+class DenseLayer_1 {
+    +Units: 32-512 (tunable)
+}
+
+package Loop(1-7) {
+
+ class DenseLayer_X {
+    +Units: 32-1024 (tunable)
+    +Activation: ReLU
+ }
+
+ class DropoutLayer {
+    +Rate: 0.0-0.5 (tunable)
+ }
+}
+
+class OutputLayer {
+    +Units: 6
+    +Activation: Sigmoid
+}
+
+
+
+InputLayer -right-> DenseLayer_1 : "Data Flow"
+DenseLayer_1 -right-> DenseLayer_X : "Data Flow"
+DenseLayer_X -right-> DropoutLayer : "Data Flow"
+DropoutLayer -right-> OutputLayer : "Data Flow\n(After loop ends)"
+
+@enduml

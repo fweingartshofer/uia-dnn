@@ -1,0 +1,30 @@
+@startuml
+skinparam rectangle {
+    BackgroundColor SkyBlue
+    BorderColor Black
+    FontSize 16
+}
+
+rectangle "Input Layer\n253 units" as Input
+rectangle "Dense Layer\n384 units" as L1
+rectangle "Dense Layer\n640 units" as L2
+rectangle "Dropout Layer\n0.1 rate" as D1
+rectangle "Dense Layer\n32 units" as L3
+rectangle "Dense Layer\n32 units" as L4
+rectangle "Dense Layer\n32 units" as L5
+rectangle "Dense Layer\n32 units" as L6
+rectangle "Dense Layer\n32 units" as L7
+rectangle "Dense Layer\n32 units" as L8
+rectangle "Output Layer\n6 units" as Output
+
+Input -right-> L1
+L1 -right-> L2
+L2 -right-> D1
+D1 -right-> L3
+L3 -right-> L4
+L4 -right-> L5
+L5 -right-> L6
+L6 -right-> L7
+L7 -right-> L8
+L8 -right-> Output
+@enduml
