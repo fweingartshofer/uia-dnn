@@ -150,3 +150,22 @@ We did not tune the hyperparameters of this model, since we wanted to see how we
 Since transformers are currently very popular in the field of natural language processing, we wanted to see if they could also be used for time series classification.
 Again, we did not tune the hyperparameters of this model to see how well it would perform without tuning.
 
+\subsection{Training}\label{subsec:training}
+
+As mentioned in Section~\ref{subsec:preprocessing}, we split the training set into a training set and a validation set.
+The validation set was used to evaluate the performance of the model during training, and to ensure that the model did not over fit to the training set.
+
+We trained every model for 100 epochs and used five trials for the Keras Tuner.
+For the models, we tuned, we used \texttt{RandomSearch} as the tuner and optimized for validation accuracy, since we wanted to maximize the accuracy of the model on the validation set.
+
+\subsection{Evaluation}\label{subsec:evaluation}
+
+For models that were tuned, we retrained the model with the best score on the training set and evaluated it on the test set.
+This was done, to plot the accuracy and loss graphs for the tuned models.
+
+For evaluating the performance of the models, we used the test set provided by the dataset.
+This is also commonly referred to as the held-back test set, since it is not used during training or validation.
+Having a held-back test set is important since it allows us to evaluate the performance of the model on unseen data.
+
+For evaluating the models, we used the accuracy, precision, recall and F1-score, as well as the confusion matrix.
+These metrics are commonly used for classification tasks, and they allow us to evaluate the performance of the model on a per-class basis.
