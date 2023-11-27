@@ -24,8 +24,10 @@ class OutputLayer {
 }
 
 InputLayer -right-> Conv1D_1 : "Data Flow"
-Conv1D_1 -right-> Conv1D_2 : "Data Flow"
-Conv1D_2 -right-> Dropout : "Data Flow"
+Conv1D_1 -right-> MaxPooling1D : "Data Flow"
+MaxPooling1D -right-> Conv1D_2 : "Data Flow"
+Conv1D_2 -right-> GlobalMaxPooling1D : "Data Flow"
+GlobalMaxPooling1D -right-> Dropout : "Data Flow"
 Dropout -right-> OutputLayer : "Data Flow"
 
 @enduml

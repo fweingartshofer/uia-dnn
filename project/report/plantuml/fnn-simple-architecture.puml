@@ -1,0 +1,26 @@
+@startuml
+class InputLayer {
+    +253
+}
+
+class DenseLayer_1 {
+    +Units: 512
+}
+
+class DenseLayer_2 {
+    +Units: 128
+    +Activation: ReLu
+}
+
+class DenseLayer_Output {
+    +Units: 6
+    +Activation: Sigmoid
+}
+
+
+
+InputLayer -right-> DenseLayer_1 : "Data Flow"
+DenseLayer_1 -right-> DenseLayer_2 : "Data Flow"
+DenseLayer_2 -right-> DenseLayer_Output : "Data Flow"
+
+@enduml

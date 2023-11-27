@@ -119,10 +119,18 @@ For different architectures, we tried to first build a simple model, and then a 
 Our project initiated with a simple Feedforward Neural Network (FF).
 This model consisted of an initial dense layer with 512 units, a hidden dense layer with 128 units using the ReLU activation function, and an output dense layer with 6 neurons.
 This was the simplest model we could think of.
+Figure~\ref{fig:fnn-simple-architecture} shows a visualization of the simple Feedforward Neural Network.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./img/ffnn/simple/fnn-simple-architecture}
+    \caption{Visualization of simple Feedforward Neural Network architecture}
+    \label{fig:fnn-simple-architecture}
+\end{figure}
 
 \textbf{Tuned Complex Feedforward Neural Network}
 
-The results from the simple Feedforward model were not satisfactory, so we decided to build a more complex model and tune it.
+The results from the simple Feedforward model were already pretty good, but we wanted to see if we could improve the performance by increasing the complexity of the model and tuning the hyperparameters.
 For this, we utilized Keras Tuner, employing a RandomSearch strategy.
 This approach allowed us to automatically fine-tune the hyperparameters of our model.
 Figure~\ref{fig:fnn-tunable-neurons} shows the network and what parameters are tunable, such as the number of layers, the number of units in each layer and the dropout rate.
@@ -142,10 +150,25 @@ The goal was to identify the most effective configuration for our dataset, enhan
 We also developed a Convolutional Neural Network model, comprising convolutional layers, max pooling, global max pooling, a dropout layer for regularization, and a softmax output layer.
 While such models are typically used for image classification, we wanted to explore whether they could be used for time-series classification as well.
 This also did not need any real preprocessing apart from reshaping the data to fit the input shape of the network.
+Figure~\ref{fig:cnn-simple-architecture} shows a visualization of the simple Convolutional Neural Network.
 
-\textbf{Tuned Complex Convolutional Neural Network}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./img/cnn/simple/cnn-simple-architecture}
+    \caption{Visualization of simple Convolutional Neural Network architecture}
+    \label{fig:cnn-simple-architecture}
+\end{figure}
+
+\textbf{Tuned Convolutional Neural Network}
 While the simple Convolutional Neural Network model performed well, we still wanted to explore whether we could improve its performance by tuning its hyperparameters.
-This involved tuning the number of filters in the convolutional layers and the dropout rate.
+This involved tuning the number of filters in the convolutional layers and the dropout rate, as shown in Figure~\ref{fig:cnn-tunable-filters}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./img/cnn/tuned/cnn-architecture}
+    \caption{Visualization of tunend Convolutional Neural Network architecture}
+    \label{fig:cnn-tunable-architecture}
+\end{figure}
 
 \subsubsection{Long Short-Term Memory}
 
