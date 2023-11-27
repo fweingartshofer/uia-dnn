@@ -186,13 +186,13 @@ Again, we did not tune the hyperparameters of this model to see how well it woul
 As mentioned in Section~\ref{subsec:preprocessing}, we split the training set into a training set and a validation set.
 The validation set was used to evaluate the performance of the model during training, and to ensure that the model did not over fit to the training set.
 
-We trained every model for 100 epochs and used five trials for the Keras Tuner.
-For the models, we tuned, we used \texttt{RandomSearch} as the tuner and optimized for validation accuracy, since we wanted to maximize the accuracy of the model on the validation set.
+We trained every model for 100 epochs and used five trials for the Keras Tuner with 3 models per trial, so we tuned a total of 15 models for each model we tuned.
+For the models, we tuned, we used \texttt{RandomSearch} as the tuner and optimized for validation accuracy.
 
 \subsection{Evaluation}\label{subsec:evaluation}
 
 For models that were tuned, we retrained the model with the best score on the training set and evaluated it on the test set.
-This was done, to plot the accuracy and loss graphs for the tuned models.
+This was done to plot the accuracy and loss graphs for the tuned models.
 
 For evaluating the performance of the models, we used the test set provided by the dataset.
 This is also commonly referred to as the held-back test set, since it is not used during training or validation.

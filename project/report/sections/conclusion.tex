@@ -1,1 +1,23 @@
 \section{Conclusion}\label{sec:conclusion}
+
+In this project we have implemented a few simple but effective models for classifying the human activities of the UCI HAR dataset.
+We have shown that even the simplest models can achieve a high accuracy on this dataset and with even a little bit of tuning, we can achieve a very high accuracy.
+
+We learned that tuning hyperparameters is crucial even for simple models, and can have a big impact on the performance.
+There are a lot of different ways to tune hyperparameters, and we have only used \texttt{RandomizedSearch} in this project, but it would be interesting to try out other methods such as \texttt{GridSearch} or \texttt{BayesianSearch}.
+
+We also learned that even with a simple smartphone, we already have more than enough data to pretty accurately classify human activities.
+Which could be used, for example, in a fitness app to track the activities of the user.
+It also demonstrates to us that smartphone manufacturers or app developers could easily track our activities if they wanted to.
+Which is a bit scary and shows that people should be careful with what apps they install on phones and what permissions they are given.
+Not every app should have access to the sensors of the phone.
+
+The authors of the dataset recorded the data with the smartphone placed on the waist of the user instead of in their pocket.
+It would be interesting to see how changing the position of the smartphone would affect the accuracy of the models.
+We assume that it would require a completely retrained model, as the position of the smartphone would affect the data collected by the sensors.
+
+We could have invested more time in getting the long-short-term-memory network and the transformer network to work.
+Working with the raw data instead of the preprocessed data, which would allow for real-time classification of the activities.
+With the preprocessed data we used for the other models, we need to wait for the data to be collected before we could classify the activities.
+Which depending on the use case, could be a problem.
+

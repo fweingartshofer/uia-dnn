@@ -4,19 +4,19 @@ class InputLayer {
 }
 
 class Conv1D_1 {
-    +Filters: 16-128 (tunable)
+    +Filters: 112
     +Kernel Size: 3
     +Activation: ReLU
 }
 
 class Conv1D_2 {
-    +Filters: 16-128 (tunable)
+    +Filters: 64
     +Kernel Size: 3
     +Activation: ReLU
 }
 
 class Dropout {
-    +Rate: 0.0-0.5 (tunable)
+    +Rate: 0.0
 }
 
 class OutputLayer {
