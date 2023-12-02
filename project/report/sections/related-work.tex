@@ -1,28 +1,30 @@
 \section{Related Work}\label{sec:related-work}
 
-Explain \gls{cnn} and \gls{lstm}.
+\gls{har} is an expanding area of research within mobile computing, which is attributed mainly to the rising availability of sensors embedded in various devices such as smartphones and wearables~\autocite{li2021deep, zhang2022sensors}.
+This expansion led to growing research on this topic, providing us with many papers to use as reference.
+Research on this topic shows, that human activity can be recognized by applying relatively simple machine learning methods like \gls{knn} and \gls{svm} with considerable success~\cite{Bustoni2020svmknn, zhao2018deep}.
+However, such machine learning methods for \gls{har} require the selection of features by human intervention and might not even achieve sufficient performance~\cite{li2021deep}.
+Recent years witnessed a growing shift in \gls{har} research towards more powerful deep learning models as a remedy for these challenges~\cite{gu2021survey}.
 
-Intro to deep learning for \gls{har}.~\cite{Brownlee2019mlmastery}
+\gls{cnn} are renowned for their excellent capability to handle high-dimensional data and robust feature extraction ability, and have become popular for \gls{har} tasks.
+They possess the intrinsic ability to conduct automatic feature extraction and selection from raw data, which greatly benefits the handling of complex sensor data.
+Their robustness to local translations and distortions has made them a good fit for recognizing activities from sensor data with spatial hierarchies or where the spatial positions of patterns play a crucial role.
+~\cite{zhao2018deep, yang2015deep}
 
-There exist many papers that address \gls{har} problems using deep learning.
+Newer research documented great success with more complex and sequence-sensitive models like the \gls{lstm}.
+\gls{lstm} are a type of Recurrent Neural Network (RNN) that are naturally suited to handle time-series data, making them ideal for \gls{har}, given the temporal dependencies involved.
+Especially the works of~\citeauthor{zhao2018deep} have shown promise in achieving high recognition results with \gls{lstm} for \gls{har} tasks~\cite{zhao2018deep,gu2021survey}.
 
-Models like \gls{knn} and \gls{svm} are already good at solving \gls{har} problems.
-Papers claim NNs better distinguish between activities and are more robust to noise.
-\gls{dcnn}, \gls{lstm}, and \gls{cnn} are the most popular NNs used for \gls{har} problems.
+Deeper architectures, like \gls{dcnn}, have also found relevance in \gls{har}, demonstrating their capability to handle complex recognition tasks.
+\authorcite{creagh2021dcnn}'s use of a \gls{dcnn} for distinguishing healthy individuals from participants with MS showcases an innovative use of deep learning in health-related \gls{har} applications.
+This highlighted the potential of \gls{dcnn} to deliver superior results over traditional \gls{svm} methods in a challenging \gls{har} context.
+~\cite{creagh2021dcnn}
 
-Paper achieved better results with \gls{lstm}~\cite{zhao2018deep}.
+Another line of research has been the use of hybrid deep models for \gls{har}.
+One such instance is the EMI-RNN model, which merges the strengths of \gls{cnn} and \gls{lstm}.
+This combination model expands the potential of deep learning in HAR by utilizing the depth of \gls{cnn} for feature extraction and the sequential understanding of \gls{lstm} for temporal interpretation.
+~\cite{dennis2018emirnn}
 
-comprehensive and in-depth survey on \gls{har} with recently developed deep learning methods~\cite{gu2021survey}.
-
-Many papers showcase the effectiveness of specific NNs in \gls{har} problems.
-Some include comparisons or instructions on how to use them.
-Existing papers and results from GitHub show similar effectiveness of models that we found in our study.
-~\cite{watanabeGitHub,pailaGithub,bradwayGitHub}
--\gls{har}
-
-More models we did not try:
-
-\gls{dcnn} applied to smartphone inertial sensor data were shown to better distinguish healthy from MS participant ambulation, compared to standard \gls{svm} feature-based methodologies
-~\cite{creagh2021dcnn}.
-
-We also came across EMI-RNN, which is a model that uses a combination of \gls{cnn} and \gls{lstm} to achieve high accuracy in \gls{har} problems.~\cite{dennis2018emirnn}
+Furthermore, several studies have sought to examine the comparative strengths and usage of different deep learning models for \gls{har}~\cite{watanabeGitHub,pailaGithub,bradwayGitHub}.
+These studies serve as practical guides for understanding the application of these models in specific \gls{har} contexts and would eventually become a basis for our own work.
+As our work focused on our personal understanding of the topic at hand, we aimed to maintain a focus on simplicity in our own model design.
