@@ -3,8 +3,6 @@
 :source-highlighter: rouge
 :rouge-style: github
 
-*DISCLAIMER*: Parts of this report were created with the help of ChatGPT and Phind.
-
 == Dataset
 
 The dataset used for this project is the Python Questions dataset from Stack Overflow, which was downloaded from [Kaggle](https://www.kaggle.com/stackoverflow/pythonquestions). This dataset consists of three CSV files:
@@ -13,7 +11,15 @@ The dataset used for this project is the Python Questions dataset from Stack Ove
 2. `Answers.csv`: Contains information about the answers to the questions. The 'ParentId' field maps to a question.
 3. `Tags.csv`: Contains the tags associated with each question. The 'Id' field here corresponds to the 'Id' in the Questions.csv file.
 
-The 'Body' fields in the Questions and Answers CSV files were cleaned using the BeautifulSoup library, and the tags were simplified by only keeping the first tag for each question.
+The 'Body' fields in the Questions and Answers CSV files were cleaned by
+- removing all HTML using the BeautifulSoup library,
+- making all text lowercase,
+- removing all punctuation and fill words,
+- and only allowing common ASCII characters.
+
+Also, the tags were simplified by only keeping the first tag for each question.
+
+Finally, the data was split into a training set and a test set. The training set contains 80% of the data, and the test set contains the remaining 20%.
 
 
 == The Models
@@ -22,7 +28,7 @@ Two models were created for this project: a chatbot as a classifier and a chatbo
 
 === Chatbot as a Classifier
 
-The chatbot as a classifier was created using a vectorizer and logistic regression. The vectorizer was used to transform the text data into numerical data, and logistic regression was used as the classifier. The classifier was trained on a subset of the dataset, and its accuracy was validated on a separate test set. The classifier can then predict the tag for a given input text.
+The chatbot as a classifier was created using a vectorizer and logistic regression. The vectorizer was used to transform the text data into numerical data, and logistic regression was used as the classifier. The classifier was trained on a subset of 10000 questions and 15000 answers. Training with the full dataset took dozens of hours and was very hard to debug, so a subset was used instead.
 
 === Chatbot as a Generator
 
@@ -38,4 +44,4 @@ The chatbot as a generator was able to generate coherent and relevant responses 
 
 The chatbot created in this project can classify input text into different categories and generate relevant responses. The classifier and generator models provide different approaches to handling user input and generating responses, and both models achieved satisfactory results.
 
-The models could be further improved with better preprocessing, fine-tuning the model parameters, and better incorporating the features.
+The models could be further improved with better preprocessing, fine-tuning the model parameters, and by improving the grouping of tags.
